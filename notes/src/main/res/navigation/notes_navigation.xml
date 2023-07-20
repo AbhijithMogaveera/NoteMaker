@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/notes_navigation.xml"
+    app:startDestination="@id/destNoteListing">
+
+    <fragment
+        android:id="@+id/destNoteCreation"
+        android:name="com.abhijith.notes.screens.creation.NoteCreation" />
+
+    <fragment
+        android:id="@+id/destNoteListing"
+        android:name="com.abhijith.notes.screens.listing.NoteListing" />
+
+</navigation>
