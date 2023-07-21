@@ -1,4 +1,4 @@
-package com.abhijith.note_data_base
+package com.abhijith.note_data_base.config
 
 import android.app.Application
 import android.content.Context

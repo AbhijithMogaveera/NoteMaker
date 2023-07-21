@@ -13,7 +13,7 @@ android {
         minSdk = 21
         targetSdk = 33
 
-        testInstrumentationRunner = "com.abhijith.note_data_base.CustomTestRunner"
+        testInstrumentationRunner = "com.abhijith.note_data_base.config.CustomTestRunner"
         consumerProguardFile("consumer-rules.pro")
     }
 

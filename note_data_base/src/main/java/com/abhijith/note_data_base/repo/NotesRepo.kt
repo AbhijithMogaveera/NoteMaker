@@ -13,6 +13,6 @@ class NotesRepo
     suspend fun insertNote(
         note: Note
     ){
-        notesDao.insert(note)
+        notesDao.insertNote(note)
     }
 }

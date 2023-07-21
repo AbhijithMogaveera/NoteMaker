@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.room.Room
 import com.abhijith.note_data_base.NotesDatabase
 import com.abhijith.note_data_base.dao.NotesDao
+import com.abhijith.note_data_base.dao.TagsDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -22,5 +23,12 @@ object DaoProvider{
         return notesDatabase.getUserDao()
     }
 
+    @Provides
+    @Singleton
+    fun getTagsDao(
+        notesDatabase: NotesDatabase
+    ):TagsDao {
+        return notesDatabase.getTagsDao()
+    }
 }
 

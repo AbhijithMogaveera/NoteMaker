@@ -1,6 +1,5 @@
-package com.abhijith.note_data_base
+package com.abhijith.note_data_base.dao
 
-import com.abhijith.note_data_base.dao.NotesDao
 import com.abhijith.note_data_base.models.Note
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
@@ -14,8 +13,9 @@ import javax.inject.Inject
 
 @HiltAndroidTest
 class NotesDaoTesting {
+
     @get:Rule
-    public var hiltRule = HiltAndroidRule(this)
+    var hiltRule = HiltAndroidRule(this)
 
     @Inject
     lateinit var notesDao: NotesDao
@@ -27,61 +27,65 @@ class NotesDaoTesting {
 
     @Test
     fun noteInsertionTest() = runBlocking {
-        notesDao.insert(
+        notesDao.insertNote(
             Note(
                 title = "",
                 description = ""
             )
         )
-        assert(notesDao.getAll().first().size == 1)
+        assert(notesDao.getAllNotes().first().size == 1)
     }
 
     @Test
     fun noteDeletionTest() = runBlocking {
-        notesDao.insert(
+        notesDao.insertNote(
             Note(
                 title = "",
                 description = ""
             )
         )
-        val note = notesDao.getAll().first().first()
+        val note = notesDao.getAllNotes().first().first()
         notesDao.delete(note = note)
-        assert(notesDao.getAll().first().isEmpty())
+        assert(notesDao.getAllNotes().first().isEmpty())
     }
 
     @Test
     fun noteUpdateTest() = runBlocking {
-        notesDao.insert(
+        notesDao.insertNote(
             Note(
                 title = "old title",
                 description = "old description"
             )
         )
         val newTitle = "New title"
-        val note = notesDao.getAll().first().first().copy(title = newTitle)
-        assert(notesDao.update(note = note) !=-1)
-        assert(notesDao.getAll().first().size == 1)
-        assert(notesDao.getAll().first().first().title == newTitle){
-            notesDao.getAll().first()
+        val note = notesDao.getAllNotes().first().first().copy(title = newTitle)
+        assert(notesDao.update(note = note) != -1)
+        assert(notesDao.getAllNotes().first().size == 1)
+        assert(notesDao.getAllNotes().first().first().title == newTitle) {
+            notesDao.getAllNotes().first()
         }
-
-
     }
+
     @Test
-    fun getAllNoteTest() = runBlocking{
-        notesDao.insert(
+    fun getAllNoteTest() = runBlocking {
+        notesDao.insertNote(
             Note(
                 title = "Note 1",
                 description = "Description One"
             )
         )
-        notesDao.insert(
+        notesDao.insertNote(
             Note(
                 title = "Note 2",
                 description = "Description Two"
             )
         )
-        assert(notesDao.getAll().first().size == 2)
+        assert(notesDao.getAllNotes().first().size == 2)
+    }
+
+    @Test
+    fun addTagToNote() = runBlocking {
+
     }
 
     @After

@@ -3,10 +3,9 @@ package com.abhijith.note_data_base.models
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "Note")
-data class Note(
+@Entity (tableName = "Tags")
+data class Tag(
     @PrimaryKey(autoGenerate = true)
-    var note_id:Long = 0L,
-    var title:String,
-    var description:String
+    var tag_id:Long = 0,
+    var name:String,
 )
