@@ -13,7 +13,7 @@ android {
         minSdk = 21
         targetSdk = 33
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "com.abhijith.note_data_base.CustomTestRunner"
         consumerProguardFile("consumer-rules.pro")
     }
 
@@ -37,6 +37,7 @@ android {
 
 dependencies {
     implementation("androidx.core:core-ktx:1.8.0")
+    implementation("androidx.test:runner:1.4.0")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
 
