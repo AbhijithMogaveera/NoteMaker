@@ -12,7 +12,8 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object NoteDatabaseProvider{
 
-    @Provides @Singleton
+    @Provides
+    @Singleton
     fun getDb(
         application: Application
     ): NotesDatabase {

@@ -7,20 +7,22 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.components.SingletonComponent
 import dagger.hilt.testing.TestInstallIn
+import javax.inject.Singleton
 
-//@Module
-//@TestInstallIn(
-//    components = [SingletonComponent::class],
-//    replaces = [NoteDatabaseProvider::class]
-//)
-//object TestNoteDatabaseProvider {
-//    @Provides
-//    fun getDb(
-//        application: Application
-//    ): NotesDatabase {
-//        return Room.inMemoryDatabaseBuilder(
-//            application,
-//            NotesDatabase::class.java
-//        ).build()
-//    }
-//}
+@Module
+@TestInstallIn(
+    components = [SingletonComponent::class],
+    replaces = [NoteDatabaseProvider::class]
+)
+object TestNoteDatabaseProvider {
+    @Provides
+    @Singleton
+    fun getDb(
+        application: Application
+    ): NotesDatabase {
+        return Room.inMemoryDatabaseBuilder(
+            application,
+            NotesDatabase::class.java
+        ).allowMainThreadQueries().build()
+    }
+}

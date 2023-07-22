@@ -15,16 +15,14 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object DaoProvider{
 
-    @Provides
-    @Singleton
+    @Provides @Singleton
     fun getNotesDao(
         notesDatabase: NotesDatabase
     ): NotesDao {
         return notesDatabase.getUserDao()
     }
 
-    @Provides
-    @Singleton
+    @Provides  @Singleton
     fun getTagsDao(
         notesDatabase: NotesDatabase
     ):TagsDao {
