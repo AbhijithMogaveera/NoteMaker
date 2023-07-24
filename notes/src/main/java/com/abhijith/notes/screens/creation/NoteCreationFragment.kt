@@ -57,9 +57,9 @@ import com.abhijith.util.BindingFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class NoteCreation : BindingFragment<NoteCreationBinding>() {
-    var selectedColor: Color? by mutableStateOf(null)
-    var showColorSelectionPopup by mutableStateOf(false)
+class NoteCreationFragment : BindingFragment<NoteCreationBinding>() {
+    private var selectedColor: Color? by mutableStateOf(null)
+    private var showColorSelectionPopup by mutableStateOf(false)
 
     @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreateBinding(

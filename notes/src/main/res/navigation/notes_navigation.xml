@@ -7,10 +7,10 @@
 
     <fragment
         android:id="@+id/destNoteCreation"
-        android:name="com.abhijith.notes.screens.creation.NoteCreation" />
+        android:name="com.abhijith.notes.screens.creation.NoteCreationFragment" />
 
     <fragment
         android:id="@+id/destNoteListing"
-        android:name="com.abhijith.notes.screens.listing.NoteListing" />
+        android:name="com.abhijith.notes.screens.listing.NoteListingFragment" />
 
 </navigation>
