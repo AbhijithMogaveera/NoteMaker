@@ -54,7 +54,9 @@ fun AnimatingSizeBox(
         animationSpec = animationSpec
     )
     if (size != 0.dp) {
-        Box(modifier = modifier.size(targetValue).testTag(tag = "content")) {
+        Box(modifier = modifier
+            .size(targetValue)
+            .testTag(tag = "content")) {
             Box(
                 modifier = Modifier
                     .align(Alignment.Center)
@@ -102,6 +104,10 @@ fun NoteCard(
                     overflow = TextOverflow.Ellipsis,
                     maxLines = 4
                 )
+            }
+
+            Box(modifier = Modifier.fillMaxSize(0.5f)){
+
             }
 
             AnimatingSizeBox(
