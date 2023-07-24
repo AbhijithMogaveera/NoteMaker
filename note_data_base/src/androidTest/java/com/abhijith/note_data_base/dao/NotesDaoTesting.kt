@@ -1,5 +1,7 @@
 package com.abhijith.note_data_base.dao
 
+import android.graphics.Color
+import androidx.core.graphics.toColor
 import com.abhijith.note_data_base.models.Note
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
@@ -30,7 +32,8 @@ class NotesDaoTesting {
         notesDao.insertNote(
             Note(
                 title = "",
-                description = ""
+                description = "",
+                color = "#FFFFFF"
             )
         )
         assert(notesDao.getAllNotes().first().size == 1)
@@ -41,7 +44,8 @@ class NotesDaoTesting {
         notesDao.insertNote(
             Note(
                 title = "",
-                description = ""
+                description = "",
+                color = "#FFFFFF"
             )
         )
         val note = notesDao.getAllNotes().first().first()
@@ -54,7 +58,8 @@ class NotesDaoTesting {
         notesDao.insertNote(
             Note(
                 title = "old title",
-                description = "old description"
+                description = "old description",
+                color = "#FFFFFF"
             )
         )
         val newTitle = "New title"
@@ -71,13 +76,15 @@ class NotesDaoTesting {
         notesDao.insertNote(
             Note(
                 title = "Note 1",
-                description = "Description One"
+                description = "Description One",
+                color = "#FFFFFF"
             )
         )
         notesDao.insertNote(
             Note(
                 title = "Note 2",
-                description = "Description Two"
+                description = "Description Two",
+                color = "#FFFFFF"
             )
         )
         assert(notesDao.getAllNotes().first().size == 2)

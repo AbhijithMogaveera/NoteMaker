@@ -15,11 +15,14 @@ import javax.inject.Inject
 @HiltAndroidTest
 class TagsDaoTesting {
 
-    @get:Rule var hiltRule = HiltAndroidRule(this)
+    @get:Rule
+    var hiltRule = HiltAndroidRule(this)
 
-    @Inject lateinit var tagsDao: TagsDao
+    @Inject
+    lateinit var tagsDao: TagsDao
 
-    @Inject lateinit var notesDao: NotesDao
+    @Inject
+    lateinit var notesDao: NotesDao
 
     @Before
     fun startUp() {
@@ -39,7 +42,13 @@ class TagsDaoTesting {
     @Test
     fun mapANoteToTag(): Unit = runBlocking {
         tagsDao.insertTag(Tag(name = "Food"))
-        notesDao.insertNote(Note(title = "Note title", description = "Note description"))
+        notesDao.insertNote(
+            Note(
+                title = "Note title",
+                description = "Note description",
+                color = "#FFFFFF"
+            )
+        )
         val insertedTag = tagsDao.getAllTag().first().first()
         val insertedNote = notesDao.getAllNotes().first().first()
         notesDao.getAllNotes().first()

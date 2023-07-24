@@ -8,5 +8,6 @@ data class Note(
     @PrimaryKey(autoGenerate = true)
     var note_id:Long = 0L,
     var title:String,
-    var description:String
+    var description:String,
+    var color:String
 )
