@@ -1,22 +1,17 @@
 package com.abhijith.notes.components
 
-import androidx.compose.animation.ExperimentalAnimationApi
-import androidx.compose.animation.core.AnimationSpec
-import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Done
@@ -25,50 +20,18 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-
-object NoteCardSemantics {
-    const val noteIsSelected: String = "This note is selected"
-}
+import com.abhijith.notes.anim.AnimatingSizeBox
+import com.abhijith.notes.util.NoteCardSemantics
 
 
-@Composable
-fun AnimatingSizeBox(
-    modifier: Modifier = Modifier,
-    isVisible: Boolean,
-    targetValue: Dp,
-    animationSpec: AnimationSpec<Dp>,
-    content: @Composable BoxScope.() -> Unit,
-) {
-    val size by animateDpAsState(
-        targetValue = if (!isVisible) 0.dp else targetValue,
-        animationSpec = animationSpec
-    )
-    if (size != 0.dp) {
-        Box(modifier = modifier
-            .size(targetValue)
-            .testTag(tag = "content")) {
-            Box(
-                modifier = Modifier
-                    .align(Alignment.Center)
-                    .size(size),
-                content = content
-            )
-        }
-    }
-
-}
-
-@OptIn(ExperimentalFoundationApi::class, ExperimentalAnimationApi::class)
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun NoteCard(
     containerColor: Color,

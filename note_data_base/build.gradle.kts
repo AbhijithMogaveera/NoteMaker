@@ -53,5 +53,6 @@ dependencies {
     androidTestImplementation  ("com.google.dagger:hilt-android-testing:2.47")
     kaptAndroidTest ("com.google.dagger:hilt-compiler:2.47")
 
+    addArrowDependency()
 
 }

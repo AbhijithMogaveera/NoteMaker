@@ -1,7 +1,5 @@
 package com.abhijith.note_data_base.dao
 
-import android.graphics.Color
-import androidx.core.graphics.toColor
 import com.abhijith.note_data_base.models.Note
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
@@ -36,11 +34,11 @@ class NotesDaoTesting {
                 color = "#FFFFFF"
             )
         )
-        assert(notesDao.getAllNotes().first().size == 1)
+        assert(notesDao.getAllNotesAsFlow().first().size == 1)
     }
 
     @Test
-    fun noteDeletionTest() = runBlocking {
+    fun existingNoteDeletionTest() = runBlocking {
         notesDao.insertNote(
             Note(
                 title = "",
@@ -48,14 +46,26 @@ class NotesDaoTesting {
                 color = "#FFFFFF"
             )
         )
-        val note = notesDao.getAllNotes().first().first()
-        notesDao.delete(note = note)
-        assert(notesDao.getAllNotes().first().isEmpty())
+        val note = notesDao.getAllNotesAsFlow().first().first()
+        val value = notesDao.delete(note = note)
+        assert(value == 1)
+    }
+
+    @Test
+    fun nonExistingNoteDeletionTest() = runBlocking {
+        val value = notesDao.delete(
+            note = Note(
+                title = "",
+                description = "",
+                color = "#FFFFFF"
+            )
+        )
+        assert(value == 0)
     }
 
     @Test
     fun noteUpdateTest() = runBlocking {
-        notesDao.insertNote(
+        val noteId:Long = notesDao.insertNote(
             Note(
                 title = "old title",
                 description = "old description",
@@ -63,11 +73,11 @@ class NotesDaoTesting {
             )
         )
         val newTitle = "New title"
-        val note = notesDao.getAllNotes().first().first().copy(title = newTitle)
-        assert(notesDao.update(note = note) != -1)
-        assert(notesDao.getAllNotes().first().size == 1)
-        assert(notesDao.getAllNotes().first().first().title == newTitle) {
-            notesDao.getAllNotes().first()
+        val note = notesDao.getAllNotesAsFlow().first().first().copy(title = newTitle)
+        assert(notesDao.update(note = note) == 1)
+        assert(notesDao.getAllNotesAsFlow().first().size == 1)
+        assert(notesDao.getAllNotesAsFlow().first().first().note_id == noteId) {
+            notesDao.getAllNotesAsFlow().first()
         }
     }
 
@@ -87,7 +97,7 @@ class NotesDaoTesting {
                 color = "#FFFFFF"
             )
         )
-        assert(notesDao.getAllNotes().first().size == 2)
+        assert(notesDao.getAllNotesAsFlow().first().size == 2)
     }
 
     @Test

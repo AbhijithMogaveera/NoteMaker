@@ -7,13 +7,13 @@ plugins {
 }
 
 android {
+
     namespace = "com.abhijith.notes"
     compileSdk = 33
 
     defaultConfig {
         minSdk = 21
         targetSdk = 33
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
     }
@@ -27,17 +27,25 @@ android {
             )
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
+
     kotlinOptions {
         jvmTarget = "17"
     }
+
+    kapt {
+        correctErrorTypes = true
+    }
+
     buildFeatures {
         viewBinding = true
         compose = true
     }
+
     composeOptions {
         kotlinCompilerExtensionVersion = "1.4.6"
     }
@@ -45,18 +53,24 @@ android {
 
 dependencies {
 
-    implementation("androidx.core:core-ktx:1.8.0")
-    implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("com.google.android.material:material:1.9.0")
+
     implementation(project(mapOf("path" to ":util")))
     implementation(project(mapOf("path" to ":theme")))
+    implementation(project(mapOf("path" to ":note_data_base")))
     testImplementation("junit:junit:4.13.2")
+
+    implementation("androidx.core:core-ktx:1.8.0")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.3.1")
+    implementation("androidx.test:core-ktx:1.5.0")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
-    androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.4.3")
-    debugImplementation("androidx.compose.ui:ui-test-manifest")
-    addNavigationDependency()
-    addHiltDependency()
+
+    implementation(platform("org.jetbrains.kotlin:kotlin-bom:1.8.0"))
+
     addComposeDependency()
     addComposeMaterial3()
+    addHiltDependency()
+    addNavigationDependency()
+    addArrowDependency()
+
 }

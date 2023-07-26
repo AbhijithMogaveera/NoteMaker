@@ -50,8 +50,8 @@ class TagsDaoTesting {
             )
         )
         val insertedTag = tagsDao.getAllTag().first().first()
-        val insertedNote = notesDao.getAllNotes().first().first()
-        notesDao.getAllNotes().first()
+        val insertedNote = notesDao.getAllNotesAsFlow().first().first()
+        notesDao.getAllNotesAsFlow().first()
         tagsDao.insertNoteTagMap(
             NoteToTags(
                 note_id = insertedNote.note_id,
