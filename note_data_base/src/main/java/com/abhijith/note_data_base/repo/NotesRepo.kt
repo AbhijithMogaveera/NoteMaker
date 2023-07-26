@@ -14,9 +14,6 @@ class NotesRepoDefaultImpl
     private val notesDao: NotesDao
 ) : NotesRepo {
     override suspend fun insertNote(note: Note): Either<Throwable, Long> = Either.catch {
-        if (note.title.isBlank() && note.description.isBlank()) {
-            throw EmptyResource
-        }
         notesDao.insertNote(note)
     }
 

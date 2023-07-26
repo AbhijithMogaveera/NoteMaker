@@ -47,18 +47,6 @@ internal class NotesRepoDefaultImplTest {
         assert(note is Either.Right && note.value == FakeNotesDao.NoteTrue.note_id)
     }
 
-    @Test
-    fun insertBlankNote() = runBlocking {
-        val note = repo.insertNote(
-            Note(
-                title = "",
-                description = "",
-                color = ""
-            )
-        )
-        assert(note is Either.Left)
-    }
-
     //-----------DELETE
     @Test
     fun deleteNoteById() = runBlocking {
