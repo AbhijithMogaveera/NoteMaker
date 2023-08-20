@@ -9,5 +9,5 @@ data class Note(
     var note_id:Long = 0L,
     var title:String,
     var description:String,
-    var color:String
+    var color:NoteColor
 )

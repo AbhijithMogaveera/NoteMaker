@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/destNoteCreation"
-        android:name="com.abhijith.notes.screens.creation.NoteCreationFragment" />
+        android:name="com.abhijith.notes.screens.creation.NoteUpsertFragment" />
 
     <fragment
         android:id="@+id/destNoteListing"

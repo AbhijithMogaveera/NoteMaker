@@ -1,6 +1,7 @@
 package com.abhijith.note_data_base.dao
 
 import com.abhijith.note_data_base.models.Note
+import com.abhijith.note_data_base.models.toNoteColor
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import kotlinx.coroutines.flow.first
@@ -31,7 +32,7 @@ class NotesDaoTesting {
             Note(
                 title = "",
                 description = "",
-                color = "#FFFFFF"
+                color = "#ffd46c".toNoteColor()
             )
         )
         assert(notesDao.getAllNotesAsFlow().first().size == 1)
@@ -43,7 +44,7 @@ class NotesDaoTesting {
             Note(
                 title = "",
                 description = "",
-                color = "#FFFFFF"
+                color = "#ffd46c".toNoteColor()
             )
         )
         val note = notesDao.getAllNotesAsFlow().first().first()
@@ -57,7 +58,7 @@ class NotesDaoTesting {
             note = Note(
                 title = "",
                 description = "",
-                color = "#FFFFFF"
+                color = "#ffd46c".toNoteColor()
             )
         )
         assert(value == 0)
@@ -69,7 +70,7 @@ class NotesDaoTesting {
             Note(
                 title = "old title",
                 description = "old description",
-                color = "#FFFFFF"
+                color = "#ffd46c".toNoteColor()
             )
         )
         val newTitle = "New title"
@@ -87,14 +88,14 @@ class NotesDaoTesting {
             Note(
                 title = "Note 1",
                 description = "Description One",
-                color = "#FFFFFF"
+                color = "#ffd46c".toNoteColor()
             )
         )
         notesDao.insertNote(
             Note(
                 title = "Note 2",
                 description = "Description Two",
-                color = "#FFFFFF"
+                color = "#ffd46c".toNoteColor()
             )
         )
         assert(notesDao.getAllNotesAsFlow().first().size == 2)

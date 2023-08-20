@@ -2,6 +2,7 @@ package com.abhijith.note_data_base.repo
 
 import arrow.core.Either
 import com.abhijith.note_data_base.models.Note
+import com.abhijith.note_data_base.models.toNoteColor
 import com.abhijith.note_data_base.repo.dao.FakeNotesDao
 import kotlinx.coroutines.runBlocking
 import org.junit.After
@@ -94,7 +95,7 @@ internal class NotesRepoDefaultImplTest {
                 note_id = 10L,
                 title = "",
                 description = "sfsdf",
-                color = "#ffffff"
+                color = "#ffffff".toNoteColor()
             )
         )
         assert(note is Either.Left)

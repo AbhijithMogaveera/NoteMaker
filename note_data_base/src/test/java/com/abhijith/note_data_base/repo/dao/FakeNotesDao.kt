@@ -2,6 +2,7 @@ package com.abhijith.note_data_base.repo.dao
 
 import com.abhijith.note_data_base.dao.NotesDao
 import com.abhijith.note_data_base.models.Note
+import com.abhijith.note_data_base.models.toNoteColor
 import kotlinx.coroutines.flow.Flow
 
 class FakeNotesDao : NotesDao {
@@ -54,7 +55,7 @@ class FakeNotesDao : NotesDao {
             note_id = NOTE_ID_EXIST,
             title = "Dunmmy title",
             description = "Dummy description",
-            color = "#FFFFFF"
+            color = "#5bc9ff".toNoteColor()
         )
     }
 }

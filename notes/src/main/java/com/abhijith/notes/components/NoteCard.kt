@@ -50,7 +50,7 @@ fun NoteCard(
         border = if (isSelected) BorderStroke(1.dp, Color.Black) else null,
     ) {
         Box(
-            modifier = Modifier.fillMaxHeight()
+            modifier = Modifier.fillMaxHeight().fillMaxWidth()
         ) {
             Column(
                 modifier = Modifier.padding(10.dp)

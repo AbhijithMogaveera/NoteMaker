@@ -55,4 +55,11 @@ dependencies {
 
     addArrowDependency()
 
+    testImplementation ("org.junit.jupiter:junit-jupiter:5.8.0")
+    testImplementation ("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.1")
+    testImplementation ("com.google.truth:truth:1.1.3")
+
+    implementation ("androidx.work:work-runtime-ktx:2.8.1")
+    implementation ("androidx.hilt:hilt-work:1.0.0")
+//    implementation ("androidx.startup:startup-runtime:1.1.1")
 }

@@ -3,6 +3,7 @@ package com.abhijith.note_data_base.dao
 import com.abhijith.note_data_base.models.Note
 import com.abhijith.note_data_base.models.NoteToTags
 import com.abhijith.note_data_base.models.Tag
+import com.abhijith.note_data_base.models.toNoteColor
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import kotlinx.coroutines.flow.first
@@ -46,7 +47,7 @@ class TagsDaoTesting {
             Note(
                 title = "Note title",
                 description = "Note description",
-                color = "#FFFFFF"
+                color = "#FFFFFF".toNoteColor()
             )
         )
         val insertedTag = tagsDao.getAllTag().first().first()

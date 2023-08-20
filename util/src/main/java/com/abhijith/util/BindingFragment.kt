@@ -33,7 +33,7 @@ abstract class BindingFragment<T:ViewBinding>: Fragment(){
     }
 
     override fun onDestroyView() {
-        super.onDestroyView()
         onDestroyBinding(binding)
+        super.onDestroyView()
     }
 }
