@@ -1,6 +1,7 @@
 package com.abhijith.note_data_base.dao
 
 import com.abhijith.note_data_base.models.Note
+import com.abhijith.note_data_base.models.NoteColor
 import com.abhijith.note_data_base.models.NoteToTags
 import com.abhijith.note_data_base.models.Tag
 import com.abhijith.note_data_base.models.toNoteColor
@@ -47,7 +48,7 @@ class TagsDaoTesting {
             Note(
                 title = "Note title",
                 description = "Note description",
-                color = "#FFFFFF".toNoteColor()
+                color = NoteColor.getColor().random()
             )
         )
         val insertedTag = tagsDao.getAllTag().first().first()

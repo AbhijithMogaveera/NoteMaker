@@ -22,6 +22,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
@@ -34,6 +35,7 @@ import com.abhijith.notes.util.NoteCardSemantics
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun NoteCard(
+    modifier: Modifier = Modifier,
     containerColor: Color,
     title: String,
     description: String,
@@ -42,15 +44,18 @@ fun NoteCard(
     onLongClick: () -> Unit = {}
 ) {
     Card(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .height(160.dp)
             .combinedClickable(onClick = onClick, onLongClick = onLongClick),
         colors = CardDefaults.cardColors(containerColor = containerColor),
-        border = if (isSelected) BorderStroke(1.dp, Color.Black) else null,
+        border = if (isSelected) BorderStroke(1.dp, Color.Black) else BorderStroke(1.dp, Color.Black.copy(alpha = 0.1f)),
+        elevation = CardDefaults.cardElevation()
     ) {
         Box(
-            modifier = Modifier.fillMaxHeight().fillMaxWidth()
+            modifier = Modifier
+                .fillMaxHeight()
+                .fillMaxWidth()
         ) {
             Column(
                 modifier = Modifier.padding(10.dp)
@@ -58,7 +63,8 @@ fun NoteCard(
                 Text(
                     text = title,
                     fontSize = 16.sp,
-                    fontWeight = FontWeight.Bold
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier.padding(vertical = 10.dp)
                 )
                 Text(
                     text = description,

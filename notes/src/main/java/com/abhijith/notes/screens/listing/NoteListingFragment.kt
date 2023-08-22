@@ -7,14 +7,18 @@ import android.widget.Toast
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
 import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
+import androidx.compose.foundation.lazy.staggeredgrid.items
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Create
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -22,9 +26,12 @@ import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
@@ -83,10 +90,16 @@ class NoteListingFragment : BindingFragment<NoteListingBinding>(), ToolBarCallBa
                             )
                         },
                         floatingActionButton = {
-                            FloatingActionButton(onClick = {
-                                findNavController().navigate(R.id.destNoteCreation)
-                            }) {
-                                Icon(imageVector = Icons.Default.Add, contentDescription = null)
+                            val notes by noteListViewModel.notes.collectAsState(initial = emptyList())
+                            if (notes.isNotEmpty()) {
+                                FloatingActionButton(onClick = {
+                                    navigateToNoteCreationPage()
+                                }) {
+                                    Icon(
+                                        imageVector = Icons.Default.Create,
+                                        contentDescription = null
+                                    )
+                                }
                             }
                         }
                     ) {
@@ -103,6 +116,10 @@ class NoteListingFragment : BindingFragment<NoteListingBinding>(), ToolBarCallBa
         }
     }
 
+    private fun navigateToNoteCreationPage() {
+        findNavController().navigate(R.id.destNoteCreation)
+    }
+
     @OptIn(ExperimentalFoundationApi::class)
     @Composable
     private fun Content() {
@@ -110,14 +127,16 @@ class NoteListingFragment : BindingFragment<NoteListingBinding>(), ToolBarCallBa
         val notes by noteListViewModel.notes.collectAsState(initial = emptyList())
         val selectedItemIds = noteListViewModel.selectedItemIds.collectAsState().value
 
-        LazyVerticalStaggeredGrid(
-            columns = StaggeredGridCells.Fixed(2),
-            content = {
-                notes.onEachIndexed { index, note ->
-                    item {
+        if (notes.isEmpty()) {
+            NoNotesFound()
+        } else {
+            LazyVerticalStaggeredGrid(
+                columns = StaggeredGridCells.Fixed(2),
+                content = {
+                    items(notes, key = { it.note_id }) { note ->
                         NoteCard(
                             containerColor = Color(note.color.color.toColorInt()),
-                            title = note.note_id.toString(),
+                            title = note.title,
                             description = note.description,
                             isSelected = selectedItemIds.contains(note.note_id),
                             onLongClick = {
@@ -125,28 +144,52 @@ class NoteListingFragment : BindingFragment<NoteListingBinding>(), ToolBarCallBa
                             },
                             onClick = {
                                 if (!noteListViewModel.isInSelectionMode()) {
-                                    Toast.makeText(requireContext(), "Clicked", Toast.LENGTH_SHORT)
+                                    Toast.makeText(
+                                        requireContext(),
+                                        "Clicked",
+                                        Toast.LENGTH_SHORT
+                                    )
                                         .show()
                                 } else {
                                     noteListViewModel.onToggleNoteSelection(note.note_id)
                                 }
-                            }
+                            },
+                            modifier = Modifier
                         )
                     }
+                    item {
+                        Box(modifier = Modifier.height(100.dp))
+                    }
+                    item {
+                        Box(modifier = Modifier.height(100.dp))
+                    }
+                },
+                verticalArrangement = Arrangement.spacedBy(10.dp),
+                horizontalArrangement = Arrangement.spacedBy(10.dp),
+                contentPadding = PaddingValues(10.dp),
+            )
+        }
+    }
 
-                }
-                item {
-                    Box(modifier = Modifier.height(100.dp))
-                }
-                item {
-                    Box(modifier = Modifier.height(100.dp))
-                }
-            },
-            verticalArrangement = Arrangement.spacedBy(10.dp),
-            horizontalArrangement = Arrangement.spacedBy(10.dp),
-            contentPadding = PaddingValues(10.dp)
-        )
-
+    @Composable
+    fun NoNotesFound() {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .fillMaxHeight(),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Icon(
+                imageVector = Icons.Filled.Create,
+                contentDescription = "Create Note",
+                modifier = Modifier.padding(10.dp)
+            )
+            Text(text = "Create your first note here...")
+            TextButton(onClick = { navigateToNoteCreationPage() }) {
+                Text(text = "Create")
+            }
+        }
     }
 
     override fun onDestroyBinding(binding: NoteListingBinding) {
