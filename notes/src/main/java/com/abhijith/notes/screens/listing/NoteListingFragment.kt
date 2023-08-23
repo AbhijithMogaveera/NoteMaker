@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -42,6 +43,8 @@ import androidx.core.graphics.toColorInt
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.abhijith.note_data_base.models.Note
+import com.abhijith.note_data_base.models.NoteColor
 import com.abhijith.notes.R
 import com.abhijith.notes.components.NoteCard
 import com.abhijith.notes.components.NotesToolBar
@@ -56,7 +59,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class NoteListingFragment : BindingFragment<NoteListingBinding>(), ToolBarCallBack {
 
-    val noteListViewModel by viewModels<NoteListingScreenViewModel>()
+    private val noteListViewModel by viewModels<NoteListingScreenViewModel>()
 
     @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreateBinding(
@@ -70,7 +73,6 @@ class NoteListingFragment : BindingFragment<NoteListingBinding>(), ToolBarCallBa
                 NoteTakingTheme {
                     Scaffold(
                         topBar = {
-                            Column {
                                 NotesToolBar(
                                     state = if (selectedItemIds.isEmpty())
                                         NotesToolBarState.Default
@@ -94,8 +96,6 @@ class NoteListingFragment : BindingFragment<NoteListingBinding>(), ToolBarCallBa
                                     },
                                     colors = TopAppBarDefaults.smallTopAppBarColors()
                                 )
-                                Divider()
-                            }
                         },
                         floatingActionButton = {
                             val notes by noteListViewModel.notes.collectAsState(initial = emptyList())
