@@ -14,7 +14,7 @@ dependencyResolutionManagement {
 }
 rootProject.name = "NoteTaking"
 include ':app'
-include ':note_data_base'
+include ':notes_data_base'
 include ':theme'
 include ':notes'
 include ':util'

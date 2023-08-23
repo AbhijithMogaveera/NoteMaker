@@ -56,7 +56,7 @@ dependencies {
 
     implementation(project(mapOf("path" to ":util")))
     implementation(project(mapOf("path" to ":theme")))
-    implementation(project(mapOf("path" to ":note_data_base")))
+    implementation(project(mapOf("path" to ":notes_data_base")))
     testImplementation("junit:junit:4.13.2")
 
     implementation("androidx.core:core-ktx:1.8.0")
