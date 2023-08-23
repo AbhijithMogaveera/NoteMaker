@@ -2,7 +2,7 @@ package com.abhijith.note_data_base.repo
 
 import arrow.core.Either
 import com.abhijith.note_data_base.dao.NotesDao
-import com.abhijith.note_data_base.exceptions.ResourceNotExists
+import com.abhijith.note_data_base.exceptions.ResourceNotFoundException
 import com.abhijith.note_data_base.models.Note
 import dagger.Module
 import dagger.Provides
@@ -22,26 +22,26 @@ class NotesRepoDefaultImpl
     }
 
     override suspend fun getNoteById(id: Long): Either<Throwable, Note> = Either.catch {
-        notesDao.getNoteById(id) ?: throw ResourceNotExists(id)
+        notesDao.getNoteById(id) ?: throw ResourceNotFoundException(id)
     }
 
     override suspend fun deleteNoteById(id: Long): Either<Throwable, Unit> = Either.catch {
         val deleteRecord = notesDao.delete(id)
         if (deleteRecord == 0)
-            throw ResourceNotExists(id)
+            throw ResourceNotFoundException(id)
     }
 
     override suspend fun deleteNote(note: Note): Either<Throwable, Unit> = Either.catch {
         requireNotNull(note.note_id)
         val deleteRecord = notesDao.delete(note)
         if (deleteRecord == 0)
-            throw ResourceNotExists(note.note_id)
+            throw ResourceNotFoundException(note.note_id)
     }
 
     override suspend fun updateNote(note: Note): Either<Throwable, Unit> = Either.catch {
         val count = notesDao.update(note)
         if (count == 0)
-            throw ResourceNotExists(note.note_id)
+            throw ResourceNotFoundException(note.note_id)
     }
 
     override suspend fun getAllNotes(): Either<Throwable, List<Note>> = Either.catch {
@@ -76,13 +76,13 @@ interface NotesRepo {
 
     /**
      * @return the note associated with [id]
-     * @throws ResourceNotExists
+     * @throws ResourceNotFoundException
      * */
     suspend fun getNoteById(id: Long): Either<Throwable, Note>
 
     /**
      * @param id id of the note to delete
-     * @throws ResourceNotExists
+     * @throws ResourceNotFoundException
      * */
     suspend fun deleteNoteById(
         id: Long
@@ -90,7 +90,7 @@ interface NotesRepo {
 
     /**
      * @param note id of the note to delete
-     * @throws ResourceNotExists
+     * @throws ResourceNotFoundException
      * */
     suspend fun deleteNote(
         note: Note
@@ -99,7 +99,7 @@ interface NotesRepo {
 
     /**
      * @param note note to delete from database
-     * @throws ResourceNotExists
+     * @throws ResourceNotFoundException
      * */
     suspend fun updateNote(note: Note): Either<Throwable, Unit>
 

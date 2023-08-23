@@ -6,8 +6,8 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.abhijith.note_data_base.models.Note
-import com.abhijith.note_data_base.usecase.NoteDeleteUseCase
-import com.abhijith.note_data_base.usecase.NoteGetUserCase
+import com.abhijith.note_data_base.usecase.DeleteNoteUseCase
+import com.abhijith.note_data_base.usecase.GetNoteUserCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -21,8 +21,8 @@ import javax.inject.Inject
 @HiltViewModel
 class NoteListingScreenViewModel
 @Inject constructor(
-    private val getNotesUseCase: NoteGetUserCase,
-    private val deleteNotesUseCase: NoteDeleteUseCase
+    private val getNotesUseCase: GetNoteUserCase,
+    private val deleteNotesUseCase: DeleteNoteUseCase
 ) : ViewModel() {
 
     private val _selectedItemIds = MutableStateFlow<List<Long>>(emptyList())

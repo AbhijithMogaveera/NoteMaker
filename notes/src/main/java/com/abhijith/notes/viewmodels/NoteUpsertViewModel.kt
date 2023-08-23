@@ -8,7 +8,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.abhijith.note_data_base.models.NoteColor
-import com.abhijith.note_data_base.usecase.NoteGetUserCase
+import com.abhijith.note_data_base.usecase.GetNoteUserCase
 import com.abhijith.note_data_base.usecase.NoteInsertUseCase
 import com.abhijith.note_data_base.usecase.UpdateNoteUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -23,7 +23,7 @@ import javax.inject.Inject
 class NoteUpsertViewModel
 @Inject constructor(
     private val useCaseNoteInsertion: NoteInsertUseCase,
-    private val useCaseGetUserCase: NoteGetUserCase,
+    private val useCaseGetUserCase: GetNoteUserCase,
     private val updateNoteUseCase: UpdateNoteUseCase,
     savedStateHandle: SavedStateHandle,
 ) : ViewModel(

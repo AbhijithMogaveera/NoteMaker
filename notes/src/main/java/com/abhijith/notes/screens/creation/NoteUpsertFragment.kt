@@ -42,7 +42,7 @@ import androidx.core.graphics.toColorInt
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.abhijith.note_data_base.exceptions.EmptyResource
+import com.abhijith.note_data_base.exceptions.EmptyResourceException
 import com.abhijith.notes.R
 import com.abhijith.notes.components.dialogs.PopUpContent
 import com.abhijith.notes.databinding.NoteCreationBinding
@@ -51,7 +51,6 @@ import com.abhijith.theme.NoteTakingTheme
 import com.abhijith.util.BindingFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -144,7 +143,7 @@ class NoteUpsertFragment : BindingFragment<NoteCreationBinding>() {
                 viewModel.saveNote()
                     .catch {
                         when (it) {
-                            is EmptyResource -> {
+                            is EmptyResourceException -> {
                                 Toast.makeText(
                                     requireContext(),
                                     "Note discarded",

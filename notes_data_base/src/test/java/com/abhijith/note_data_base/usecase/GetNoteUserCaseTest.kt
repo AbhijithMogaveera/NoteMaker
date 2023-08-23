@@ -2,7 +2,7 @@ package com.abhijith.note_data_base.usecase
 
 import org.junit.Test
 
-internal class NoteGetUserCaseTest {
+internal class GetNoteUserCaseTest {
 
     @Test
     fun getNoteById() {
