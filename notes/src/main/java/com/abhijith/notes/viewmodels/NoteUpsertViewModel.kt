@@ -22,9 +22,9 @@ import javax.inject.Inject
 @HiltViewModel
 class NoteUpsertViewModel
 @Inject constructor(
-    val useCaseNoteInsertion: NoteInsertUseCase,
-    val useCaseGetUserCase: NoteGetUserCase,
-    val updateNoteUseCase: UpdateNoteUseCase,
+    private val useCaseNoteInsertion: NoteInsertUseCase,
+    private val useCaseGetUserCase: NoteGetUserCase,
+    private val updateNoteUseCase: UpdateNoteUseCase,
     savedStateHandle: SavedStateHandle,
 ) : ViewModel(
 
