@@ -5,9 +5,12 @@ import com.abhijith.note_data_base.models.Note
 import com.abhijith.note_data_base.repo.NotesRepo
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import javax.inject.Inject
+import javax.inject.Singleton
 
 
-class UpdateNoteUseCase(
+@Singleton
+class UpdateNoteUseCase @Inject constructor(
     private val repo: NotesRepo
 ) {
     suspend fun updateNote(
@@ -18,5 +21,7 @@ class UpdateNoteUseCase(
             repo.deleteNote(note).bind()
         else
             repo.updateNote(note).bind()
+        emit(Unit)
+
     }
 }

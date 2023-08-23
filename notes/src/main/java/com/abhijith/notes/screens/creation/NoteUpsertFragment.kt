@@ -46,7 +46,7 @@ import com.abhijith.note_data_base.exceptions.EmptyResource
 import com.abhijith.notes.R
 import com.abhijith.notes.components.dialogs.PopUpContent
 import com.abhijith.notes.databinding.NoteCreationBinding
-import com.abhijith.notes.viewmodels.NoteCreationScreenViewModel
+import com.abhijith.notes.viewmodels.NoteUpsertViewModel
 import com.abhijith.theme.NoteTakingTheme
 import com.abhijith.util.BindingFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -59,7 +59,7 @@ class NoteUpsertFragment : BindingFragment<NoteCreationBinding>() {
 
     private var showColorSelectionPopup by mutableStateOf(false)
 
-    private val viewModel by viewModels<NoteCreationScreenViewModel>()
+    private val viewModel by viewModels<NoteUpsertViewModel>()
 
     @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreateBinding(
@@ -116,7 +116,13 @@ class NoteUpsertFragment : BindingFragment<NoteCreationBinding>() {
 
     @Composable
     private fun Title() {
-        Text(text = "Create Your Note")
+        Text(
+            text =
+            when (viewModel.mode) {
+                NoteUpsertViewModel.Companion.Mode.CRETE -> "Create Note"
+                NoteUpsertViewModel.Companion.Mode.EDIT -> "Update Note"
+            }
+        )
     }
 
     @Composable
@@ -147,12 +153,7 @@ class NoteUpsertFragment : BindingFragment<NoteCreationBinding>() {
                                 findNavController().navigateUp()
                             }
                         }
-                    }.collectLatest {
-                        Toast.makeText(
-                            requireContext(),
-                            "Note saved successfully",
-                            Toast.LENGTH_SHORT
-                        ).show()
+                    }.collect {
                         findNavController().navigateUp()
                     }
 

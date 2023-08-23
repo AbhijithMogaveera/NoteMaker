@@ -28,6 +28,8 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
+import androidx.compose.material3.TopAppBarColors
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -36,6 +38,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.core.graphics.toColorInt
+import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.abhijith.notes.R
@@ -86,7 +89,8 @@ class NoteListingFragment : BindingFragment<NoteListingBinding>(), ToolBarCallBa
                                     if (noteListViewModel.isNotedIsGettingDeleted) {
                                         CircularProgressIndicator()
                                     }
-                                }
+                                },
+                                colors = TopAppBarDefaults.smallTopAppBarColors()
                             )
                         },
                         floatingActionButton = {
@@ -117,7 +121,13 @@ class NoteListingFragment : BindingFragment<NoteListingBinding>(), ToolBarCallBa
     }
 
     private fun navigateToNoteCreationPage() {
-        findNavController().navigate(R.id.destNoteCreation)
+        findNavController().navigate(R.id.destNoteUpsert)
+    }
+
+    private fun navigateNotesDetailsPage(id:Long){
+        findNavController().navigate(R.id.destNoteUpsert, bundleOf(
+            "note_id" to id
+        ))
     }
 
     @OptIn(ExperimentalFoundationApi::class)
@@ -144,12 +154,7 @@ class NoteListingFragment : BindingFragment<NoteListingBinding>(), ToolBarCallBa
                             },
                             onClick = {
                                 if (!noteListViewModel.isInSelectionMode()) {
-                                    Toast.makeText(
-                                        requireContext(),
-                                        "Clicked",
-                                        Toast.LENGTH_SHORT
-                                    )
-                                        .show()
+                                    navigateNotesDetailsPage(note.note_id)
                                 } else {
                                     noteListViewModel.onToggleNoteSelection(note.note_id)
                                 }

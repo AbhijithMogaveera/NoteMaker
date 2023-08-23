@@ -9,8 +9,8 @@ import javax.inject.Inject
 class NoteGetUserCase @Inject constructor(
     private val repo: NotesRepo
 ) {
-    fun getNoteById(noteId: Long) = flow<Note> {
-        repo.getNoteById(noteId).bind()
+    fun getNoteById(noteId: Long) = flow {
+        emit(repo.getNoteById(noteId).bind())
     }
 
     suspend fun getAllNotes() = repo.getAllNotes()
