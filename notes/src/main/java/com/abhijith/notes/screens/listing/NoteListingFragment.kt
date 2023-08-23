@@ -21,6 +21,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Create
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
@@ -69,29 +70,32 @@ class NoteListingFragment : BindingFragment<NoteListingBinding>(), ToolBarCallBa
                 NoteTakingTheme {
                     Scaffold(
                         topBar = {
-                            NotesToolBar(
-                                state = if (selectedItemIds.isEmpty())
-                                    NotesToolBarState.Default
-                                else NotesToolBarState.Selection(selectedItemIds.size),
-                                toolBarCallBack = this@NoteListingFragment,
-                                actions = {
-                                    if (selectedItemIds.isNotEmpty()) {
-                                        IconButton(onClick = {
-                                            noteListViewModel.deleteSelectedNoted()
-                                            noteListViewModel.onNoteSelectionCleared()
-                                        }) {
-                                            Icon(
-                                                imageVector = Icons.Filled.Delete,
-                                                contentDescription = null
-                                            )
+                            Column {
+                                NotesToolBar(
+                                    state = if (selectedItemIds.isEmpty())
+                                        NotesToolBarState.Default
+                                    else NotesToolBarState.Selection(selectedItemIds.size),
+                                    toolBarCallBack = this@NoteListingFragment,
+                                    actions = {
+                                        if (selectedItemIds.isNotEmpty()) {
+                                            IconButton(onClick = {
+                                                noteListViewModel.deleteSelectedNoted()
+                                                noteListViewModel.onNoteSelectionCleared()
+                                            }) {
+                                                Icon(
+                                                    imageVector = Icons.Filled.Delete,
+                                                    contentDescription = null
+                                                )
+                                            }
                                         }
-                                    }
-                                    if (noteListViewModel.isNotedIsGettingDeleted) {
-                                        CircularProgressIndicator()
-                                    }
-                                },
-                                colors = TopAppBarDefaults.smallTopAppBarColors()
-                            )
+                                        if (noteListViewModel.isNotedIsGettingDeleted) {
+                                            CircularProgressIndicator()
+                                        }
+                                    },
+                                    colors = TopAppBarDefaults.smallTopAppBarColors()
+                                )
+                                Divider()
+                            }
                         },
                         floatingActionButton = {
                             val notes by noteListViewModel.notes.collectAsState(initial = emptyList())
