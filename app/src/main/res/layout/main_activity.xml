@@ -6,11 +6,12 @@
     android:background="#fffbed"
     android:layout_width="match_parent">
 
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/materialCardView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
-        app:cardCornerRadius="15dp">
+        style="@style/ShapeAppearance_custom_corners">
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/fcv"
@@ -19,5 +20,5 @@
             android:layout_height="match_parent"
             app:defaultNavHost="true"
             app:navGraph="@navigation/app_navigation" />
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
 </androidx.constraintlayout.widget.ConstraintLayout>
