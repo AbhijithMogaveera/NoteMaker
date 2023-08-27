@@ -1,7 +1,7 @@
 
 # NoteMaker
 
-![Group 1](https://github.com/AbhijithMogaveera/NoteMaker/assets/46936065/1db8decb-ce27-4193-9c6e-7b44046d9dcc)
+![Group 1](https://github.com/AbhijithMogaveera/NoteMaker/assets/46936065/382aec34-fb64-401c-ba6f-3bb54e5cc453)
 
 - Clean Architecture structure
 - Kotlin as the primary programming language
