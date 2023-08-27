@@ -100,15 +100,5 @@ class NotesDaoTesting {
         )
         assert(notesDao.getAllNotesAsFlow().first().size == 2)
     }
-
-    @Test
-    fun addTagToNote() = runBlocking {
-
-    }
-
-    @After
-    fun tearDown() {
-
-    }
 }
 
