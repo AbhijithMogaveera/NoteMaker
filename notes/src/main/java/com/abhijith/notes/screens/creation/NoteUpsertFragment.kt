@@ -1,8 +1,11 @@
 package com.abhijith.notes.screens.creation
 
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.view.Window
 import android.widget.Toast
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.layout.Box
@@ -26,15 +29,19 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Popup
 import androidx.compose.ui.window.PopupProperties
@@ -43,15 +50,26 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.abhijith.note_data_base.exceptions.EmptyResourceException
-import com.abhijith.notes.R
 import com.abhijith.notes.components.dialogs.PopUpContent
 import com.abhijith.notes.databinding.NoteCreationBinding
+import com.abhijith.notes.util.ColorUtils
 import com.abhijith.notes.viewmodels.NoteUpsertViewModel
 import com.abhijith.theme.NoteTakingTheme
 import com.abhijith.util.BindingFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
+
+
+@Composable
+fun getTextAndTint(color: Color): Color {
+    val textAndTintColor by remember(
+        key1 = color
+    ) {
+        mutableStateOf(Color(ColorUtils.getContrastColor(color.toArgb())))
+    }
+    return textAndTintColor
+}
 
 @AndroidEntryPoint
 class NoteUpsertFragment : BindingFragment<NoteCreationBinding>() {
@@ -92,7 +110,8 @@ class NoteUpsertFragment : BindingFragment<NoteCreationBinding>() {
                         containerColor = selectedColor,
                         floatingActionButton = {
                             FloatingActionButton()
-                        }
+                        },
+                        modifier = Modifier
                     ) {
                         ScreenContent(it)
                     }
@@ -101,37 +120,48 @@ class NoteUpsertFragment : BindingFragment<NoteCreationBinding>() {
         }
     }
 
+    override fun onDestroyBinding(binding: NoteCreationBinding) {
+        super.onDestroyBinding(binding)
+    }
+
     @Composable
     private fun NavigationIcon() {
+        val color = getTextAndTint(color = (Color(viewModel.selectedNoteColor.color.toColorInt())))
         IconButton(onClick = {
-            findNavController().navigate(R.id.destNoteListing)
+            findNavController().navigateUp()
         }) {
             Icon(
                 imageVector = Icons.Default.ArrowBack,
-                contentDescription = null
+                contentDescription = null,
+                tint = color
             )
         }
     }
 
     @Composable
     private fun Title() {
+        val color = getTextAndTint(color = (Color(viewModel.selectedNoteColor.color.toColorInt())))
+
         Text(
             text =
             when (viewModel.mode) {
                 NoteUpsertViewModel.Companion.Mode.CRETE -> "Create Note"
                 NoteUpsertViewModel.Companion.Mode.EDIT -> "Update Note"
-            }
+            },
+            color = color
         )
     }
 
     @Composable
     private fun RowScope.Actions() {
+        val color = getTextAndTint(color = (Color(viewModel.selectedNoteColor.color.toColorInt())))
         IconButton(onClick = {
             showColorSelectionPopup = !showColorSelectionPopup
         }) {
             Icon(
                 imageVector = Icons.Default.MoreVert,
-                contentDescription = null
+                contentDescription = null,
+                tint = color
             )
         }
     }
@@ -165,6 +195,7 @@ class NoteUpsertFragment : BindingFragment<NoteCreationBinding>() {
     @Composable
     @OptIn(ExperimentalMaterial3Api::class)
     private fun ScreenContent(it: PaddingValues) {
+        val color = getTextAndTint(color = (Color(viewModel.selectedNoteColor.color.toColorInt())))
         Box(
             modifier = Modifier
                 .fillMaxSize()
@@ -184,7 +215,8 @@ class NoteUpsertFragment : BindingFragment<NoteCreationBinding>() {
                     Modifier.fillMaxWidth(),
                     placeholder = {
                         Text(text = "Title...")
-                    }
+                    },
+                    colors = TextFieldDefaults.outlinedTextFieldColors(textColor = color)
                 )
                 Spacer(modifier = Modifier.height(10.dp))
                 OutlinedTextField(
@@ -195,7 +227,8 @@ class NoteUpsertFragment : BindingFragment<NoteCreationBinding>() {
                         .defaultMinSize(minHeight = 200.dp),
                     placeholder = {
                         Text(text = "Description...")
-                    }
+                    },
+                    colors = TextFieldDefaults.outlinedTextFieldColors(textColor = color)
                 )
             }
         }

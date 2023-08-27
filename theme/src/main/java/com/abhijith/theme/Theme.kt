@@ -2,6 +2,7 @@ package com.abhijith.theme
 
 import android.app.Activity
 import android.content.ContextWrapper
+import android.graphics.Color
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
@@ -41,9 +42,8 @@ class ThemeGGG
 @Composable
 fun NoteTakingTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    // Dynamic color is available on Android 12+
     dynamicColor: Boolean = true,
-    content: @Composable () -> Unit
+    content: @Composable () -> Unit,
 ) {
     val colorScheme = when {
         dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
@@ -60,13 +60,13 @@ fun NoteTakingTheme(
         context.baseContext
     else
         context
-    if (!view.isInEditMode) {
-        SideEffect {
-            val window = (mContext as Activity).window
-            window.statusBarColor = colorScheme.primary.toArgb()
-            WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = darkTheme
-        }
-    }
+//    if (!view.isInEditMode) {
+//        SideEffect {
+//            val window = (mContext as Activity).window
+//            window.statusBarColor = Color.BLACK
+//            WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = darkTheme
+//        }
+//    }
 
     MaterialTheme(
         colorScheme = colorScheme,

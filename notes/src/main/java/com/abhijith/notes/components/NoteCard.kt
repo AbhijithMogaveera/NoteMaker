@@ -28,7 +28,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.graphics.toColorInt
 import com.abhijith.notes.anim.AnimatingSizeBox
+import com.abhijith.notes.screens.creation.getTextAndTint
 import com.abhijith.notes.util.NoteCardSemantics
 
 
@@ -43,13 +45,17 @@ fun NoteCard(
     onClick: () -> Unit = {},
     onLongClick: () -> Unit = {}
 ) {
+    val color = getTextAndTint(color = containerColor)
     Card(
         modifier = modifier
             .fillMaxWidth()
             .height(160.dp)
             .combinedClickable(onClick = onClick, onLongClick = onLongClick),
         colors = CardDefaults.cardColors(containerColor = containerColor),
-        border = if (isSelected) BorderStroke(1.dp, Color.Black) else BorderStroke(1.dp, Color.Black.copy(alpha = 0.1f)),
+        border = if (isSelected) BorderStroke(1.dp, Color.Black) else BorderStroke(
+            1.dp,
+            Color.Black.copy(alpha = 0.1f)
+        ),
         elevation = CardDefaults.cardElevation()
     ) {
         Box(
@@ -64,18 +70,20 @@ fun NoteCard(
                     text = title,
                     fontSize = 16.sp,
                     fontWeight = FontWeight.Bold,
-                    modifier = Modifier.padding(vertical = 10.dp)
+                    modifier = Modifier.padding(vertical = 10.dp),
+                    color = color
                 )
                 Text(
                     text = description,
                     fontSize = 14.sp,
                     fontWeight = FontWeight.W500,
                     overflow = TextOverflow.Ellipsis,
-                    maxLines = 4
+                    maxLines = 4,
+                    color = color
                 )
             }
 
-            Box(modifier = Modifier.fillMaxSize(0.5f)){
+            Box(modifier = Modifier.fillMaxSize(0.5f)) {
 
             }
 

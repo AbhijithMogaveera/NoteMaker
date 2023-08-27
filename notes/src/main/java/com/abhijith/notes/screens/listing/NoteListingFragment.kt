@@ -3,9 +3,7 @@ package com.abhijith.notes.screens.listing
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -22,7 +20,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Create
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
@@ -30,7 +27,6 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
-import androidx.compose.material3.TopAppBarColors
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -43,8 +39,6 @@ import androidx.core.graphics.toColorInt
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.abhijith.note_data_base.models.Note
-import com.abhijith.note_data_base.models.NoteColor
 import com.abhijith.notes.R
 import com.abhijith.notes.components.NoteCard
 import com.abhijith.notes.components.NotesToolBar
@@ -54,6 +48,7 @@ import com.abhijith.notes.databinding.NoteListingBinding
 import com.abhijith.notes.viewmodels.NoteListingScreenViewModel
 import com.abhijith.theme.NoteTakingTheme
 import com.abhijith.util.BindingFragment
+import com.google.android.material.internal.WindowUtils
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

@@ -76,10 +76,8 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
     implementation(platform("org.jetbrains.kotlin:kotlin-bom:1.8.0"))
-
     addComposeDependency()
     addComposeMaterial3()
     addHiltDependency()
     addNavigationDependency()
-
 }

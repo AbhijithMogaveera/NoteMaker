@@ -14,7 +14,8 @@ class NoteColor private constructor(var color: String) {
             "#5bc9ff",
             "#ff6666",
             "#ffd46c",
-            "#67ffc5"
+            "#67ffc5",
+            "#000000"
         ).map {
             NoteColor(it)
         }
