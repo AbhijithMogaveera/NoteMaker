@@ -82,7 +82,8 @@ internal class NoteCardKtTest {
     }
 
     @Test
-    fun checkUnSelectedStateUI(): Unit = runBlocking {
+    fun checkUnSelectedStateUI(
+    ): Unit = runBlocking {
         composeTestRule.setContent {
             Box(modifier = Modifier) {
                 NoteCard(
@@ -100,7 +101,8 @@ internal class NoteCardKtTest {
     }
 
     @Test
-    fun checkUnSelectedStateUIAnimationTest(): Unit = runBlocking {
+    fun checkUnSelectedStateUIAnimationTest(
+    ): Unit = runBlocking {
         composeTestRule.setContent {
             Box(modifier = Modifier) {
                 NoteCard(
@@ -119,7 +121,8 @@ internal class NoteCardKtTest {
     }
 
     @Test
-    fun checkSelectedStateUIAnimationTest(): Unit = runBlocking {
+    fun checkSelectedStateUIAnimationTest(
+    ): Unit = runBlocking {
         composeTestRule.setContent {
             Box(modifier = Modifier) {
                 NoteCard(
@@ -138,7 +141,8 @@ internal class NoteCardKtTest {
     }
 
     @Test
-    fun animationTestOfSizedBox(): Unit = runBlocking {
+    fun animationTestOfSizedBox(
+    ): Unit = runBlocking {
         var isVisible by mutableStateOf(false)
         composeTestRule.setContent {
             AnimatingSizeBox(

@@ -66,7 +66,7 @@ class NotesDaoTesting {
 
     @Test
     fun noteUpdateTest() = runBlocking {
-        val noteId:Long = notesDao.insertNote(
+        val noteId: Long = notesDao.insertNote(
             Note(
                 title = "old title",
                 description = "old description",

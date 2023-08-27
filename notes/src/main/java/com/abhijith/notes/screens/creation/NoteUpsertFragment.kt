@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Done
@@ -192,6 +193,11 @@ class NoteUpsertFragment : BindingFragment<NoteCreationBinding>() {
     @OptIn(ExperimentalMaterial3Api::class)
     private fun ScreenContent(it: PaddingValues) {
         val color = getTextAndTint(color = (Color(viewModel.selectedNoteColor.color.toColorInt())))
+        val outlinedTextFieldColors = TextFieldDefaults.outlinedTextFieldColors(
+            textColor = color,
+            focusedBorderColor = color,
+            unfocusedBorderColor = color.copy(alpha = 0.6f)
+        )
         Box(
             modifier = Modifier
                 .fillMaxSize()
@@ -210,9 +216,9 @@ class NoteUpsertFragment : BindingFragment<NoteCreationBinding>() {
                     onValueChange = viewModel::onTitleChanged,
                     Modifier.fillMaxWidth(),
                     placeholder = {
-                        Text(text = "Title...")
+                        Text(text = "Title...", color = color.copy(alpha = 0.6f))
                     },
-                    colors = TextFieldDefaults.outlinedTextFieldColors(textColor = color)
+                    colors = outlinedTextFieldColors
                 )
                 Spacer(modifier = Modifier.height(10.dp))
                 OutlinedTextField(
@@ -222,9 +228,9 @@ class NoteUpsertFragment : BindingFragment<NoteCreationBinding>() {
                         .fillMaxWidth()
                         .defaultMinSize(minHeight = 200.dp),
                     placeholder = {
-                        Text(text = "Description...")
+                        Text(text = "Description...",color = color.copy(alpha = 0.6f))
                     },
-                    colors = TextFieldDefaults.outlinedTextFieldColors(textColor = color)
+                    colors = outlinedTextFieldColors,
                 )
             }
         }

@@ -30,6 +30,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.graphics.toColorInt
 import com.abhijith.note_data_base.models.NoteColor
+import com.abhijith.notes.screens.creation.getTextAndTint
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
@@ -67,24 +68,24 @@ fun PopUpContent(
                     colorList.onEach { noteColor ->
                         val color = Color(noteColor.color.toColorInt())
                         item {
+                            val tint = getTextAndTint(color = color)
+
                             Box() {
                                 Card(
                                     modifier = Modifier
                                         .align(Alignment.Center)
                                         .size(60.dp)
-                                        .clip(
-                                            FloatingActionButtonDefaults.smallShape
-                                        )
-                                        .background(color = color),
+                                    ,
                                     colors = CardDefaults.cardColors(
                                         containerColor = color
                                     ),
                                     onClick = {
                                         onColorSelected(noteColor)
                                     },
-                                    border = if (selectedColor == noteColor) {
-                                        BorderStroke(2.dp, Color.Black)
-                                    } else null
+                                    border = if (selectedColor.color == noteColor.color) {
+                                        BorderStroke(2.dp, tint)
+                                    } else null,
+                                    shape = FloatingActionButtonDefaults.smallShape
                                 ) {
                                 }
                                 if (selectedColor.color == noteColor.color) {
@@ -97,8 +98,8 @@ fun PopUpContent(
                                         Icon(
                                             imageVector = Icons.Default.Done,
                                             contentDescription = null,
-
-                                            )
+                                            tint = tint
+                                        )
                                     }
                                 }
 
