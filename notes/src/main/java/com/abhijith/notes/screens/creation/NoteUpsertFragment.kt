@@ -109,7 +109,8 @@ class NoteUpsertFragment : BindingFragment<NoteCreationBinding>() {
                         floatingActionButton = {
                             FloatingActionButton()
                         },
-                        modifier = Modifier
+                        modifier = Modifier,
+
                     ) {
                         ScreenContent(it)
                     }

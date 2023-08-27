@@ -4,14 +4,7 @@
         <item name="android:background">@color/gray_400</item>
         <item name="exampleColor">@color/light_blue_400</item>
     </style>
-    <style name="ShapeAppearance_custom_corners" parent="ShapeAppearance.Material3.Corner.ExtraSmall">
-        <item name="cornerFamily">rounded</item>
-        <item name="cornerSizeTopLeft">4dp</item>
-        <item name="cornerSizeTopRight">4dp</item>
-    </style>
-    <style name="CustomCardCorners" parent="@style/Widget.MaterialComponents.CardView">
-        <item name="shapeAppearanceOverlay">@style/ShapeAppearance_custom_corners</item>
-    </style>
+
 
 
 </resources>

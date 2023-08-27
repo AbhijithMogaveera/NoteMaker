@@ -7,12 +7,10 @@
     android:layout_width="match_parent">
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/materialCardView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
-        style="@style/ShapeAppearance_custom_corners">
-
+        app:cardCornerRadius="10dp">
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/fcv"
             android:name="androidx.navigation.fragment.NavHostFragment"
