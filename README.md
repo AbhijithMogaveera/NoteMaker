@@ -11,5 +11,6 @@
 - UI and UI testing using Jetpack Compose
 - Instrumental testing
 - Pure Junit testing
+- Dagger Hilt for Dependency Injection
 - Dependency inversion for testability
 - Jetpack Navigation Component for navigation within the app
