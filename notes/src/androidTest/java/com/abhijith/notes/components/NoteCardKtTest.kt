@@ -48,10 +48,10 @@ internal class NoteCardKtTest {
             "dfsdjfsdfasdfasf asdofasdfjsafsdf"
 
     @Test
-    fun clicksTest(): Unit {
+    fun clicksTest() {
         runBlocking {
-            var isClicked: Boolean = false
-            var onLongPress: Boolean = false
+            var isClicked = false
+            var onLongPress = false
             composeTestRule.setContent {
                 Box(modifier = Modifier) {
                     NoteCard(
