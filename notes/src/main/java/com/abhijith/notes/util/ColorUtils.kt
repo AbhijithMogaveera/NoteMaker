@@ -1,19 +1,18 @@
-package com.abhijith.notes.util;
+package com.abhijith.notes.util
 
-import android.graphics.Color;
+import android.graphics.Color
 
-public class ColorUtils {
-
-    public static int getContrastColor(int backgroundColor) {
-        double brightness = ColorUtils.calculateBrightness(backgroundColor);
-        int textColor = (brightness < 128) ? Color.WHITE : Color.BLACK;
-        return textColor;
+object ColorUtils {
+    fun getContrastColor(backgroundColor: Int): Int {
+        val brightness =
+            calculateBrightness(backgroundColor)
+        return if (brightness < 128) Color.WHITE else Color.BLACK
     }
 
-    public static double calculateBrightness(int color) {
-        int red = Color.red(color);
-        int green = Color.green(color);
-        int blue = Color.blue(color);
-        return (0.299 * red + 0.587 * green + 0.114 * blue);
+    private fun calculateBrightness(color: Int): Double {
+        val red = Color.red(color)
+        val green = Color.green(color)
+        val blue = Color.blue(color)
+        return 0.299 * red + 0.587 * green + 0.114 * blue
     }
 }
