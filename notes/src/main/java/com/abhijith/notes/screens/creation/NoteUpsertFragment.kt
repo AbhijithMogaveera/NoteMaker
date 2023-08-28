@@ -38,6 +38,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Popup
 import androidx.compose.ui.window.PopupProperties
@@ -81,6 +82,7 @@ class NoteUpsertFragment : BindingFragment<NoteCreationBinding>() {
         savedInstanceState: Bundle?
     ): NoteCreationBinding {
         return NoteCreationBinding.inflate(inflater, container, false).apply {
+            this.composeContent.setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
             this.composeContent.setContent {
                 val selectedColor by animateColorAsState(
                     targetValue = Color(viewModel.selectedNoteColor.color.toColorInt()),
@@ -109,7 +111,7 @@ class NoteUpsertFragment : BindingFragment<NoteCreationBinding>() {
                         },
                         modifier = Modifier,
 
-                    ) {
+                        ) {
                         ScreenContent(it)
                     }
                 }
@@ -228,7 +230,7 @@ class NoteUpsertFragment : BindingFragment<NoteCreationBinding>() {
                         .fillMaxWidth()
                         .defaultMinSize(minHeight = 200.dp),
                     placeholder = {
-                        Text(text = "Description...",color = color.copy(alpha = 0.6f))
+                        Text(text = "Description...", color = color.copy(alpha = 0.6f))
                     },
                     colors = outlinedTextFieldColors,
                 )

@@ -9,11 +9,11 @@ plugins {
 android {
 
     namespace = "com.abhijith.notes"
-    compileSdk = 33
+    compileSdk = Versions.App.maxSdk
 
     defaultConfig {
-        minSdk = 21
-        targetSdk = 33
+        minSdk = Versions.App.minSdk
+        targetSdk = Versions.App.maxSdk
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
     }

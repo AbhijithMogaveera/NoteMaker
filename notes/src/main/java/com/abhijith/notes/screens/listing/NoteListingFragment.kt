@@ -34,6 +34,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.compose.ui.unit.dp
 import androidx.core.graphics.toColorInt
 import androidx.core.os.bundleOf
@@ -64,6 +65,7 @@ class NoteListingFragment : BindingFragment<NoteListingBinding>(), ToolBarCallBa
     ): NoteListingBinding {
         return NoteListingBinding.inflate(inflater, container, false).apply {
             this.composeContent.setContent {
+                this.composeContent.setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
                 val selectedItemIds = noteListViewModel.selectedItemIds.collectAsState().value
                 NoteTakingTheme {
                     Scaffold(
