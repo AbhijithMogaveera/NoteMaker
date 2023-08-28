@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.abhijith.note_data_base.models.Note
 import com.abhijith.note_data_base.usecase.DeleteNoteUseCase
-import com.abhijith.note_data_base.usecase.GetNoteUserCase
+import com.abhijith.note_data_base.usecase.GetNoteUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -21,7 +21,7 @@ import javax.inject.Inject
 @HiltViewModel
 class NoteListingScreenViewModel
 @Inject constructor(
-    private val getNotesUseCase: GetNoteUserCase,
+    private val getNotesUseCase: GetNoteUseCase,
     private val deleteNotesUseCase: DeleteNoteUseCase
 ) : ViewModel() {
 

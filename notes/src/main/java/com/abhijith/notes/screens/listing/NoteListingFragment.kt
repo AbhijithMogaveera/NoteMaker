@@ -39,6 +39,7 @@ import androidx.core.graphics.toColorInt
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.abhijith.note_data_base.models.Note
 import com.abhijith.notes.R
 import com.abhijith.notes.components.NoteCard
 import com.abhijith.notes.components.NotesToolBar
@@ -48,7 +49,6 @@ import com.abhijith.notes.databinding.NoteListingBinding
 import com.abhijith.notes.viewmodels.NoteListingScreenViewModel
 import com.abhijith.theme.NoteTakingTheme
 import com.abhijith.util.BindingFragment
-import com.google.android.material.internal.WindowUtils
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -123,9 +123,9 @@ class NoteListingFragment : BindingFragment<NoteListingBinding>(), ToolBarCallBa
         findNavController().navigate(R.id.destNoteUpsert)
     }
 
-    private fun navigateNotesDetailsPage(id:Long){
+    private fun navigateNotesDetailsPage(note:Note){
         findNavController().navigate(R.id.destNoteUpsert, bundleOf(
-            "note_id" to id
+            "note" to note
         ))
     }
 
@@ -153,7 +153,7 @@ class NoteListingFragment : BindingFragment<NoteListingBinding>(), ToolBarCallBa
                             },
                             onClick = {
                                 if (!noteListViewModel.isInSelectionMode()) {
-                                    navigateNotesDetailsPage(note.note_id)
+                                    navigateNotesDetailsPage(note)
                                 } else {
                                     noteListViewModel.onToggleNoteSelection(note.note_id)
                                 }

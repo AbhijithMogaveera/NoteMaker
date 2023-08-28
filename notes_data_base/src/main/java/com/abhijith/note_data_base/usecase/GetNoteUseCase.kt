@@ -5,7 +5,7 @@ import com.abhijith.note_data_base.repo.NotesRepo
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
-class GetNoteUserCase @Inject constructor(
+class GetNoteUseCase @Inject constructor(
     private val repo: NotesRepo
 ) {
     fun getNoteById(noteId: Long) = flow {

@@ -1,8 +1,11 @@
 package com.abhijith.note_data_base.models
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 
 
-class NoteColor private constructor(var color: String) {
+@Parcelize
+class NoteColor private constructor(var color: String):Parcelable {
     companion object{
         operator fun invoke(color: String): NoteColor {
             return getColor().first {
