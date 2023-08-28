@@ -20,8 +20,7 @@ import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performTouchInput
 import androidx.compose.ui.unit.dp
-import com.abhijith.notes.anim.AnimatingSizeBox
-import com.abhijith.notes.components.NoteCard
+import com.abhijith.notes.anim.AnimatedBox
 import com.abhijith.notes.util.NoteCardSemantics
 import kotlinx.coroutines.runBlocking
 import org.junit.After
@@ -145,7 +144,7 @@ internal class NoteCardKtTest {
     ): Unit = runBlocking {
         var isVisible by mutableStateOf(false)
         composeTestRule.setContent {
-            AnimatingSizeBox(
+            AnimatedBox(
                 isVisible = isVisible,
                 targetValue = 100.dp,
                 animationSpec = tween(durationMillis = 2000),

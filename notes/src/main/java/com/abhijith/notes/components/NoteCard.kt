@@ -22,14 +22,12 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.core.graphics.toColorInt
-import com.abhijith.notes.anim.AnimatingSizeBox
+import com.abhijith.notes.anim.AnimatedBox
 import com.abhijith.notes.screens.creation.getTextAndTint
 import com.abhijith.notes.util.NoteCardSemantics
 
@@ -87,7 +85,7 @@ fun NoteCard(
 
             }
 
-            AnimatingSizeBox(
+            AnimatedBox(
                 isVisible = isSelected,
                 animationSpec = tween(300),
                 targetValue = 40.dp,

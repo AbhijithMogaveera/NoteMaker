@@ -15,9 +15,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Done
 import androidx.compose.material.icons.filled.MoreVert
@@ -48,7 +46,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.abhijith.note_data_base.exceptions.EmptyResourceException
-import com.abhijith.notes.components.dialogs.PopUpContent
+import com.abhijith.notes.components.dialogs.ColorPickerPopup
 import com.abhijith.notes.databinding.NoteCreationBinding
 import com.abhijith.notes.util.ColorUtils
 import com.abhijith.notes.viewmodels.NoteUpsertViewModel
@@ -251,7 +249,7 @@ class NoteUpsertFragment : BindingFragment<NoteCreationBinding>() {
                 showColorSelectionPopup = !showColorSelectionPopup
             },
         ) {
-            PopUpContent(
+            ColorPickerPopup(
                 onColorSelected = viewModel::setNoteColor,
                 selectedColor = viewModel.selectedNoteColor
             )

@@ -14,7 +14,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun AnimatingSizeBox(
+fun AnimatedBox(
     modifier: Modifier = Modifier,
     isVisible: Boolean,
     targetValue: Dp,
@@ -23,7 +23,7 @@ fun AnimatingSizeBox(
 ) {
     val size by animateDpAsState(
         targetValue = if (!isVisible) 0.dp else targetValue,
-        animationSpec = animationSpec
+        animationSpec = animationSpec, label = ""
     )
     if (size != 0.dp) {
         Box(
