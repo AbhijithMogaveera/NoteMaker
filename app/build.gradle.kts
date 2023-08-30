@@ -65,7 +65,7 @@ android {
 
 dependencies {
     implementation(project(mapOf("path" to ":theme")))
-    implementation(project(mapOf("path" to ":notes")))
+    implementation(project(mapOf("path" to ":notes_ui")))
 
     testImplementation("junit:junit:4.13.2")
 

@@ -16,5 +16,5 @@ rootProject.name = "NoteTaking"
 include ':app'
 include ':notes_data_base'
 include ':theme'
-include ':notes'
+include ':notes_ui'
 include ':util'
